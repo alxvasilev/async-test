@@ -32,7 +32,8 @@ int main()
     // global test initialization code (if any) goes here
     testGroup("group one")
     {
-        group.beforeEach = [&](test::Test& t){ printf("beforeEach\n"); };
+        group.beforeEach = [&](test::Test& t){ printf("before each\n"); };
+        group.beforeEach = [&](test::Test& t){ printf("after each\n"); };
 
         asyncTest("test one",
         {{"event 1", "order", 1}, {"event 2", "timeout", 4000, "order", 2}})
@@ -81,8 +82,7 @@ int main()
 
 ## Structure
 
-Tests are grouped in 'test groups', each group having the option to define a function that can be executed before each of the
-tests in the group.  
+Tests are grouped in 'test groups', each group having the option to define a function that can be executed before each and/or after each of the tests in the group.  
 The framework does not take control over the main() function, so it is defined by the user. The user is free to insert any
 initialization/cleanup code before/after each test group. For example, global initialization code can simply be put at the
 beginning of the main() function, before the definition of the first test group. However, code inside a group is not run
