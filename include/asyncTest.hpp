@@ -19,7 +19,7 @@ extern const char* kColorNormal;
 extern const char* kColorWarning;
 }
 #define TEST_HAVE_COLOR_VARS
-#include "asyncTest-private.hpp"
+#include "eventLoop.hpp"
 
 #define TEST_LOG_NO_EOL(fmtString,...) printf(fmtString, ##__VA_ARGS__)
 #define TEST_LOG(fmtString,...) TEST_LOG_NO_EOL(fmtString "\n", ##__VA_ARGS__)
@@ -83,7 +83,7 @@ class ITestBody
 {
 public:
     virtual void call() = 0;
-    ~ITestBody(){}
+    virtual ~ITestBody(){}
 };
 
 class Test
