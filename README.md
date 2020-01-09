@@ -14,22 +14,22 @@ order occurs in unexpected order, or an unhandled exception occurs.
 In addition to asynchnorous tests, the environment supports ordinary synchronous tests, where the test is considered complete
 once the code of the test returns, an error is explicitly signalled by the code, or an unhandled exception occurs.  
 
-The framework is a header-only library. To use it, it is needed to only include the public header "asyncTest-framework.h",
+The framework is a header-only library. To use it, it is needed to only include the public header "asyncTest.hpp",
 and to insert the TESTS_INIT() macro in the global scope, before the main() function.  
  
 ## Simple example
 ```
-#include <promise.h>
+#include <promise.hpp>
 
 //good to have the test framework header included last,
 //to minimize the chance of macro conflicts
 #include <asyncTest.hpp>
 
-INIT_TESTS();
+TESTS_INIT();
 
 int main()
 {
-    <global test initialization code (if any) goes here>
+    // global test initialization code (if any) goes here
     testGroup("group one")
     {
         group.beforeEach = [&](test::Test& t){ printf("beforeEach\n"); };
@@ -74,7 +74,7 @@ int main()
              check(a == 2); // if a is not 2, calls test.error() and throws test::BailoutException
          }).disable(); //disables the test
     });
-    <global cleanup code (if any) goes here>
+    // global cleanup code (if any) goes here
     return test::gNumFailed; //return the total error count to the calling process. Useful for automation
 }
 ```
